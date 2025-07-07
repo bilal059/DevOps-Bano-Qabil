@@ -1,71 +1,13 @@
-from flask import Flask, request, jsonify, render_template_string
+from flask import Flask, request, jsonify, render_template
 import string
 
 app = Flask(__name__)
 
-# HTML Template (inline instead of using separate index.html)
-html_page = '''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Password Strength Checker</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
-      padding: 40px;
-      text-align: center;
-    }
-    input, button {
-      padding: 10px;
-      margin: 10px;
-      font-size: 16px;
-    }
-    .result {
-      margin-top: 20px;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <h2>Password Strength Checker</h2>
-  <input type="text" id="password" placeholder="Enter password">
-  <button onclick="checkPassword()">Check Strength</button>
-  <div class="result" id="result"></div>
-
-  <script>
-    function checkPassword() {
-      const password = document.getElementById("password").value;
-
-      fetch("/check-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ password: password })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.strength) {
-          document.getElementById("result").innerText = `Strength: ${data.strength}`;
-        } else {
-          document.getElementById("result").innerText = `Error: ${data.error}`;
-        }
-      })
-      .catch(error => {
-        document.getElementById("result").innerText = "Something went wrong!";
-      });
-    }
-  </script>
-</body>
-</html>
-'''
 
 # Home route to serve the form
 @app.route('/')
 def home():
-    return render_template_string(html_page)
+    return render_template('index.html')
 
 # Password strength checking logic
 def check_strength(password):
