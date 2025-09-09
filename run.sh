@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "Hello World from Bilal Nasir and <YOUR_NAME>"
+echo "Hello World from Bilal Nasir and Muzammil Bilwani"
