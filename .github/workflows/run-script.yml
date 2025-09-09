@@ -2,7 +2,7 @@ name: Runs Shell Script
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   workflow_dispatch: {}
 
 jobs:
@@ -11,6 +11,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
+      - name: Make script executable
+        run: chmod +x ./run.sh
+
       - name: Run Shell Script
-        run: chmod +x ./assignment/run.sh
+        run: ./run.sh
+
+
